@@ -24,39 +24,50 @@ export default {
   tokenStoreType: env.TOKEN_STORE_TYPE || 'file',
   maxListeners: envNumber('MAX_LISTENERS', 15),
   customUserDataDir: env.CUSTOM_USER_DATA_DIR || './userDataDir/',
+
   webhook: {
     url: env.WEBHOOK_URL || null,
-    autoDownload: true,
+
+    // Desactivamos eventos que no necesitamos
+    autoDownload: false,
     uploadS3: false,
-    readMessage: true,
+    readMessage: false,
     allUnreadOnStart: false,
-    listenAcks: true,
-    onPresenceChanged: true,
-    onParticipantsChanged: true,
-    onReactionMessage: true,
-    onPollResponse: true,
-    onRevokedMessage: true,
+    listenAcks: false,
+    onPresenceChanged: false,
+    onParticipantsChanged: false,
+    onReactionMessage: false,
+    onPollResponse: false,
+    onRevokedMessage: false,
+
+    // ÚNICO EVENTO DE NEGOCIO QUE QUEREMOS RECIBIR
     onLabelUpdated: true,
+
     onSelfMessage: false,
     ignore: ['status@broadcast'],
   },
+
   websocket: {
     autoDownload: false,
     uploadS3: false,
   },
+
   chatwoot: {
     sendQrCode: true,
     sendStatus: true,
   },
+
   archive: {
     enable: false,
     waitTime: 10,
     daysToArchive: 45,
   },
+
   log: {
     level: 'silly', // Before open a issue, change level to silly and retry a action
     logger: ['console', 'file'],
   },
+
   createOptions: {
     browserArgs: [
       '--disable-web-security',
@@ -83,13 +94,11 @@ export default {
       '--ignore-ssl-errors',
       '--ignore-certificate-errors-spki-list',
     ],
+
     /**
      * Example of configuring the linkPreview generator
-     * If you set this to 'null', it will use global servers; however, you have the option to define your own server
-     * Clone the repository https://github.com/wppconnect-team/wa-js-api-server and host it on your server with ssl
-     *
-     * Configure the attribute as follows:
-     * linkPreviewApiServers: [ 'https://www.yourserver.com/wa-js-api-server' ]
+     * If you set this to 'null', it will use global servers; however,
+     * you have the option to define your own server.
      */
     linkPreviewApiServers: null,
 
@@ -98,10 +107,12 @@ export default {
      */
     // whatsappVersion: '2.xxxxx',
   },
+
   mapper: {
     enable: false,
     prefix: 'tagone-',
   },
+
   db: {
     mongodbDatabase: env.MONGODB_DATABASE || 'tokens',
     mongodbCollection: env.MONGODB_COLLECTION || '',
@@ -117,6 +128,7 @@ export default {
     redisDb: envNumber('REDIS_DB', 0),
     redisPrefix: env.REDIS_PREFIX || 'docker',
   },
+
   aws_s3: {
     region: 'sa-east-1' as any,
     access_key_id: null,
