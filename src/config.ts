@@ -28,19 +28,19 @@ export default {
   webhook: {
     url: env.WEBHOOK_URL || null,
 
-    // Desactivamos eventos que no necesitamos
-    autoDownload: false,
+    // Configuración original de eventos
+    autoDownload: true,
     uploadS3: false,
-    readMessage: false,
+    readMessage: true,
     allUnreadOnStart: false,
-    listenAcks: false,
-    onPresenceChanged: false,
-    onParticipantsChanged: false,
-    onReactionMessage: false,
-    onPollResponse: false,
-    onRevokedMessage: false,
+    listenAcks: true,
+    onPresenceChanged: true,
+    onParticipantsChanged: true,
+    onReactionMessage: true,
+    onPollResponse: true,
+    onRevokedMessage: true,
 
-    // ÚNICO EVENTO DE NEGOCIO QUE QUEREMOS RECIBIR
+    // Mantener habilitados los cambios de etiquetas
     onLabelUpdated: true,
 
     onSelfMessage: false,
